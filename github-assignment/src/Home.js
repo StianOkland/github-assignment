@@ -33,7 +33,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.state.gitusers.map(user => <div> {user.login} </div>)} */}
         {this.gitlist()}
       </div>
     ) 

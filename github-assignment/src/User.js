@@ -11,26 +11,38 @@ export default class User extends React.Component {
         super(props)
         this.state = {
             user: [],
-            name: ''
+            name: '',
+            username: '',
+            company: '',
+            blog: '',
+            location: '',
+            repositories: []
         } 
 
-        this.gitlist = this.gitlist.bind(this)
+        this.repolist = this.repolist.bind(this)
     }
     
     componentDidMount() {
-        this.setState({name: this.props.username})
+        this.setState({username: this.props.username})
 
-        // Fetching repositories for a user
-        fetch(`https://api.github.com/users/${this.state.name}`)
+        fetch(`https://api.github.com/users/${this.props.username}`)
+        .then(response => response.json())
+        .then(data => { this.setState({name: data.name})
+            this.setState({company: data.company})
+            this.setState({blog: data.blog})
+            this.setState({location: data.location}) })
+
+        //Fetching repositories for a user
+        fetch(`https://api.github.com/users/${this.props.username}/repos`)
         .then((response) => response.json())
-        .then((data) => this.setState({user: data}))
+        .then((data) => this.setState({repositories: data}))
     }
 
 
-    gitlist() {
+    repolist() {
         return (
-          this.state.user.map(item => 
-            <div> {item.type} </div>
+          this.state.repositories.map(item => 
+            <div> {item.name} </div>
           )
         )
       }
@@ -39,33 +51,20 @@ export default class User extends React.Component {
     render() {
         return (
         <div>
-            <h2>HEi ther {this.state.name} </h2>
+            <h2>Hei there {this.state.username} </h2>
+            <h4>Name: {this.state.name}</h4>
+            <h4>Company: {this.state.company}  </h4>
+            <h4>blog: {this.state.blog} </h4>
+            <h4>location: {this.state.location} </h4>
             <div>
-                {this.gitlist}
+                {this.repolist()}
             </div>
-            
         </div>
         ) 
     }
 }
 
 
-// const User = () => {
-//     const { username } = useParams()
-
-
-//     const response = await fetch(`https://api.github.com/users/${username}`)
-//     const data = await response.json()
-
-
-//     return (
-//         <div className='User-info'>
-//             <h2> User info - { }</h2>
-//         </div>
-//     )
-// }
-
-// export default User
 
 
 
