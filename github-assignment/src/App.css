@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.button {
+  cursor: pointer;
+  border: 1px solid #1a202c;
+  padding: 8px;
+  min-width: 64px;
+  background: transparent;
+ 
+  transition: all 0.1s ease-in;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
