@@ -25,6 +25,7 @@ export default class Home extends React.Component {
   }
   
   gitlist() {
+    // Return a list with Github users login name and link to details-page
     return (
       this.state.gitusers.map(user => 
         <button className='button'>
@@ -35,6 +36,7 @@ export default class Home extends React.Component {
   }
 
   filteredlist() {
+    // Diplaying the filtered list only containing user-login matching the users input
     return (
       this.state.filterdata.map(user => 
         <button className='button'>
@@ -45,14 +47,18 @@ export default class Home extends React.Component {
   }
 
   handleFilter(event) {
+    // Filter the list of Github users into a new list containing the user-login matching the users input
     const searchWord = event.target.value
     const newFilter = this.state.gitusers.filter((value) => {
-      return value.login.includes(searchWord);
+      if(searchWord) {
+        return value.login.includes(searchWord);
+      }
     })
     this.setState({filterdata: newFilter})
   }
 
   search() {
+    // Search bar for user the search the after a Github user, either with full name or only parts of it
     return (
       <div className='search'>
         <div className='searchInput'>
@@ -70,7 +76,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className='Homescreen'>
           <h2>Github Users</h2>
         </div>
         {this.gitlist()}
