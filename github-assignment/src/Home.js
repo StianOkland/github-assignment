@@ -29,6 +29,7 @@ export default class Home extends React.Component {
     return (
       this.state.gitusers.map(user => 
         <button className='button'>
+          <img src={user.avatar_url} alt='image' className='image'/>
           <Link to={{pathname:`/user/${user.login}`}} style={{textDecoration: 'none'}}> {user.login} </Link>
         </button>
       )
@@ -40,6 +41,7 @@ export default class Home extends React.Component {
     return (
       this.state.filterdata.map(user => 
         <button className='button'>
+          <img src={user.avatar_url} alt='image' className='image'/>
           <Link to={{pathname:`/user/${user.login}`}} style={{textDecoration: 'none'}}> {user.login} </Link>
         </button>
       )

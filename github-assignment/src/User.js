@@ -1,9 +1,5 @@
 import './App.css';
 import React from 'react'
-// import { useParams } from 'react-router-dom'
-
-
-
 
 export default class User extends React.Component {
     
@@ -16,6 +12,7 @@ export default class User extends React.Component {
             company: '',
             blog: '',
             location: '',
+            imageurl: '',
             repositories: []
         } 
 
@@ -36,7 +33,6 @@ export default class User extends React.Component {
             else {
                 this.setState({name: 'N/A'})
             }
-
             if(data.company) {
                 this.setState({company: data.company})
             }
@@ -54,6 +50,9 @@ export default class User extends React.Component {
             }
             else {
                 this.setState({location: 'N/A'})
+            }
+            if(data.avatar_url) {
+                this.setState({avatar_url: data.avatar_url})
             }
         })
 
@@ -77,7 +76,10 @@ export default class User extends React.Component {
     render() {
         return (
         <div>
-            <h2>Hei {this.state.username} </h2>
+            <div>
+                <img src={this.state.avatar_url} alt='image' className='image_profile'/>
+                <h2>Hei {this.state.username} </h2>
+            </div>
             <h4>Name: {this.state.name}</h4>
             <h4>Company: {this.state.company}  </h4>
             <h4>Blog: {this.state.blog} </h4>
